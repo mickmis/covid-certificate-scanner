@@ -5,6 +5,11 @@ emitted to extract and display all the information it encloses. It is implemente
 
 The development was made possible by the fact that the specifications of the certificate are in open-access, and the reference implementations are open-source.
 
+## Useful links
+- [A reference implementation](https://github.com/ehn-digital-green-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js)
+- [Specifications Vol. 3](https://ec.europa.eu/health/sites/default/files/ehealth/docs/digital-green-certificates_v3_en.pdf)
+- [Specifications - Value Sets](https://ec.europa.eu/health/sites/default/files/ehealth/docs/digital-green-certificates_dt-specifications_en.pdf)
+
 ## Upcoming
 - verification of signature
 - languages
@@ -16,13 +21,3 @@ The development was made possible by the fact that the specifications of the cer
 
 # Contact
 [Mickaël Misbach](https://github.com/mickmis) - [mickael@misba.ch](mailto:mickael@misba.ch)
-
-
-    // ref impl: https://github.com/ehn-digital-green-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
-    // specs: https://ec.europa.eu/health/sites/default/files/ehealth/docs/digital-green-certificates_v3_en.pdf
-
-
-// todo: encode info in https://ec.europa.eu/health/sites/default/files/ehealth/docs/digital-green-certificates_dt-specifications_en.pdf
-// todo: recup les schemas JSON pour avoir info!!
-// todo: also get the value sets for parsing! beware of differences between upstream and actual repo
-// todo: test with all test data  of official repos
