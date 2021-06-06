@@ -13,11 +13,11 @@ The development was made possible by the fact that the specifications of the cer
 ## Upcoming
 - verification of signature
 - languages
-- use value sets for interpreting raw certificate data
 
 ## What's new
 ### 06/06/21 - Initial version 
-- scan certificates from a camera or an image
+- scan certificates from a camera, an image or from provided examples
+- use of value sets for interpreting raw data
 
 # Contact
 [Mickaël Misbach](https://github.com/mickmis) - [mickael@misba.ch](mailto:mickael@misba.ch)
