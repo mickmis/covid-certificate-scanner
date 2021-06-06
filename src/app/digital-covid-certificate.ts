@@ -84,25 +84,45 @@ export class DigitalCovidCertificate {
   // Parse COSE, CWT and certificate. qrPayloadDecoded is the QR payload stripped from its health certificate version,
   // base45-decoded and zlib-decompressed.
   private parseCertificate(qrPayloadDecoded: Uint8Array): Observable<DigitalCovidCertificate> {
-    return fromPromise<{err, tag: number, value: Array<Uint8Array>}>(cbor.decodeFirst(qrPayloadDecoded)).pipe(
-      tap(cose => {
-        this.coseSignatures = cose.value[3];
-        fromPromise<Map<number, any>>(cbor.decodeFirst(cose.value[0])).subscribe(protectedHeader => {
+    return fromPromise<{err, tag: number, value: any}>(cbor.decodeFirst(qrPayloadDecoded)).pipe(
+      map(decoded => {
+        console.log('Decoded CBOR: ', decoded);
+        let cose: Array<Uint8Array|Map<number, any>>;
+        if (!decoded.tag) {
+          // case where the COSE_Sign1 tag is omitted
+          cose = decoded as unknown as Array<Uint8Array>;
+        } else if (decoded.tag === 61 && decoded.value && decoded.value.tag === 18) {
+          // case where there is a COSE_Sign1 inside CWT
+          cose = decoded.value.value;
+        } else if (decoded.tag === 18) {
+          // normal case where he have a COSE_Sign1 message
+          cose = decoded.value;
+        } else {
+          throw new Error(`Unknown CBOR message tag: ${decoded.tag}`);
+        }
+
+        this.coseSignatures = (cose[3] as Uint8Array);
+        fromPromise<Map<number, any>>(cbor.decodeFirst(cose[0])).subscribe(protectedHeader => {
           this.coseAlgorithm = protectedHeader.get(1);
           this.coseKeyId = protectedHeader.get(4);
 
           if (!this.coseKeyId) {
-            // the kid might be in the unprotected header
-            fromPromise<Map<number, any>>(cbor.decodeFirst(cose.value[1])).subscribe(unprotectedHeader => {
-              this.coseKeyId = unprotectedHeader.get(4);
-            });
+            // the kid might be in the unprotected header, either CBOR-encoded or not
+            try {
+              fromPromise<Map<number, any>>(cbor.decodeFirst(cose[1])).subscribe(unprotectedHeader => {
+                this.coseKeyId = unprotectedHeader.get(4);
+              });
+            } catch (e) {
+              this.coseKeyId = (cose[1] as Map<number, any>).get(4);
+            }
           }
         });
+        return cose;
       }),
-      switchMap(cose => fromPromise<Map<number, any>>(cbor.decodeFirst(cose.value[2]))),
+      switchMap(cose => fromPromise<Map<number, any>>(cbor.decodeFirst(cose[2]))),
       map(cwt => {
         if (!cwt || cwt.size === 0) {
-          throw new Error(`invalid COSE payload: ${cwt}`);
+          throw new Error(`Invalid COSE payload: ${cwt}`);
         }
         this.cosePayload = cwt;
         this.cwtIssuer = cwt.get(1);

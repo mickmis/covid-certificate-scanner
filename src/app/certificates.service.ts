@@ -35,7 +35,7 @@ export class CertificatesService {
 
   onParseError(errMsg: string): void {
     this.parsingCount--;
-    console.log(errMsg);
+    console.error(errMsg);
     this.snackBarService.open(errMsg, 'Close');
   }
 
