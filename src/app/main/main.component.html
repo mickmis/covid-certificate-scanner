@@ -1,0 +1,50 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Scan a certificate with your camera</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="row-center-flex">
+      <video width="320px" #webcam></video>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="qrScanner.start()">Start scan</button>
+      <button mat-button color="warn" (click)="qrScanner.stop()">Stop scan</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Scan a certificate from an image</mat-panel-title>
+    </mat-expansion-panel-header>
+    <ngp-image-picker class="row-center-flex" [_config]="imagePickerConf" ($imageChanged)="onImageChange($event)"></ngp-image-picker>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Scan an example certificate</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="example-certificates row-center-flex">
+      <figure style="display: inline">
+        <figcaption>Vaccine certificate</figcaption>
+        <img src="assets/1.png" width="150" alt="Vaccine certificate" />
+      </figure>
+      <figure style="display: inline">
+        <figcaption>Test certificate</figcaption>
+        <img src="assets/2.png" width="150" alt="Test certificate" />
+      </figure>
+      <figure style="display: inline">
+        <figcaption>Recovery certificate</figcaption>
+        <img src="assets/3.png" width="150" alt="Recovery certificate" />
+      </figure>
+    </div>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="loadCertFromImage('assets/1.png')">Scan vaccine certificate</button>
+      <button mat-button color="primary" (click)="loadCertFromImage('assets/2.png')">Scan test certificate</button>
+      <button mat-button color="primary" (click)="loadCertFromImage('assets/3.png')">Scan recovery certificate</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

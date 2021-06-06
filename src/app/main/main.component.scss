@@ -1,0 +1,31 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+.date-left-element {
+  padding-right: 1em;
+}
+
+.params-toggle {
+  display: block;
+}
+
+:host ::ng-deep .mat-button-toggle-label-content {
+  line-height: 2em !important;
+}
+
+.mat-action-row {
+  place-content: space-around;
+}
+
+.row-center-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-certificates figure figcaption {
+  text-align: center;
+}

@@ -1,0 +1,20 @@
+<div class="main">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name">EU Digital COVID Certificate Scanner</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="mat-typography">
+    <mat-sidenav #sidenav mode="side" opened="true">
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

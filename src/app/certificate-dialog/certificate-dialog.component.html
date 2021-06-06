@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>Digital Covid Certificate</h1>
+<div mat-dialog-content>
+
+  <h2>Personal Information</h2>
+  <ul>
+    <li>Name(s): <i>{{(names|async)}}</i></li>
+    <li>Transliterated name(s): <i>{{(transliteratedNames|async)}}</i></li>
+    <li>Date of birth: <i>{{(certModel|async).dob}}</i></li>
+  </ul>
+
+  <div *ngIf="(certModel|async).v">
+    <div *ngFor="let vEntry of (certModel|async).v; let vIdx = index">
+      <h2>Vaccination (entry {{vIdx+1}})</h2>
+      <ul>
+        <li>Unique Certificate Identifier (UVCI): <i>{{vEntry.ci}}</i></li>
+        <li>Country of vaccination: <i>{{vEntry.co}}</i></li>
+        <li>Issuer of certificate: <i>{{vEntry.is}}</i></li>
+        <li>Targeted disease or agent: <i>{{vEntry.tg}}</i></li>
+
+        <li>Doses: <i>{{vEntry.dn}} out of {{vEntry.sd}}</i></li>
+        <li>Date of vaccination: <i>{{formatDate(vEntry.dt, false)}}</i></li>
+        <li>Marketing authorization holder or manufacturer: <i>{{vEntry.ma}}</i></li>
+        <li>Vaccine medicinal product: <i>{{vEntry.mp}}</i></li>
+        <li>Vaccine or prophylaxis: <i>{{vEntry.vp}}</i></li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="(certModel|async).t">
+    <div *ngFor="let tEntry of (certModel|async).t; let tIdx = index">
+      <h2>Test (entry {{tIdx+1}})</h2>
+      <ul>
+        <li>Unique Certificate Identifier (UVCI): <i>{{tEntry.ci}}</i></li>
+        <li>Country of test: <i>{{tEntry.co}}</i></li>
+        <li>Issuer of certificate: <i>{{tEntry.is}}</i></li>
+        <li>Targeted disease or agent: <i>{{tEntry.tg}}</i></li>
+
+        <li>RAT test name and manufacturer: <i>{{tEntry.ma ? tEntry.ma : "[missing]"}}</i></li>
+        <li>NAA test name: <i>{{tEntry.nm ? tEntry.nm : "[missing]"}}</i></li>
+        <li>Date and time of sample collection: <i>{{formatDate(tEntry.sc, true)}}</i></li>
+        <li>Testing center: <i>{{tEntry.tc}}</i></li>
+        <li>Test result: <i>{{tEntry.tr}}</i></li>
+        <li>Type of test: <i>{{tEntry.tt}}</i></li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="(certModel|async).r">
+    <div *ngFor="let rEntry of (certModel|async).r; let rIdx = index">
+      <h2>Recovery (entry {{rIdx+1}})</h2>
+      <ul>
+        <li>Unique Certificate Identifier (UVCI): <i>{{rEntry.ci}}</i></li>
+        <li>Country of test: <i>{{rEntry.co}}</i></li>
+        <li>Issuer of certificate: <i>{{rEntry.is}}</i></li>
+        <li>Targeted disease or agent: <i>{{rEntry.tg}}</i></li>
+
+        <li>Validity: from <i>{{formatDate(rEntry.df, true)}}</i> to <i>{{formatDate(rEntry.du, true)}}</i></li>
+        <li>First positive NAA test result: <i>{{formatDate(rEntry.fr, true)}}</i></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Technical Metadata</h2>
+  <ul>
+    <li>Version: <i>{{(certModel|async).ver}}</i></li>
+    <li>Signature:</li>
+    <ul>
+      <li>Issuer: <i>{{(cert|async).cwtIssuer}}</i></li>
+      <li>Issued at: <i>{{formatDate(timestampToDate((cert|async).cwtIssuedAt), true)}}</i></li>
+      <li>Expiring at: <i>{{formatDate(timestampToDate((cert|async).cwtExpirationTime), true)}}</i></li>
+      <li>Algorithm: <i>{{(cert|async).coseAlgorithmName}} ({{(cert|async).coseAlgorithm}})</i></li>
+      <li>Key identifier: <i>{{toHexString((cert|async).coseKeyId)}}</i></li>
+    </ul>
+  </ul>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

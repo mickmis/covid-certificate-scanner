@@ -1,0 +1,61 @@
+.side-nav-element {
+  padding: 1em;
+}
+
+.side-nav-element p, h1, h2, small, span, a {
+  text-align: center;
+}
+
+.side-nav-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+:host .mat-tab-header {
+  border-bottom: none;
+}
+:host .mat-tab-header-pagination {
+  display: none !important;
+}
+:host .mat-tab-labels {
+  flex-direction: column;
+}
+:host .mat-ink-bar {
+  left: 99% !important;
+  height: 48px;
+}
+:host .mat-tab-body-wrapper {
+  flex: 1 1 auto;
+}
+
+.routing-nav-link-active {
+  color: #c2185b;
+  font-weight: bold;
+}
+
+.side-nav-footer-icon {
+  padding: 1em;
+  color: black;
+}
+
+:host ::ng-deep .mat-list-item-content {
+  width: 100%;
+}
+
+#routing-nav-list a {
+  width: 100%;
+  height: 100%;
+  line-height: 48px;
+}
+
+.side-nav-small-text {
+  line-height: normal;
+  font-size: smaller;
+}
+
+.side-nav-small-text p {
+  margin: 0;
+}

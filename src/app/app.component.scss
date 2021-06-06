@@ -1,0 +1,21 @@
+mat-sidenav {
+  width: 300px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+h1.app-name {
+  margin-left: 1em;
+}
+
+.mat-sidenav-container {
+  height: 100%;
+}

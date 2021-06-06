@@ -1,0 +1,46 @@
+<div class="side-nav-element">
+  <p>
+    With this web application you can scan any
+    <a href="https://ec.europa.eu/info/live-work-travel-eu/coronavirus-response/safe-covid-19-vaccines-europeans/eu-digital-covid-certificate_en">
+      EU Digital COVID Certificate
+    </a>
+    emitted to extract and display all the information it encloses.
+  </p>
+</div>
+
+<div class="side-nav-footer">
+  <div *ngIf="isLoading" class="side-nav-element center-flex">
+    <mat-spinner diameter="30" color="accent"></mat-spinner>
+    <span style="font-size: 1em; margin-left: 1em;">
+      Loading in progress...
+    </span>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="side-nav-element side-nav-small-text">
+    <p style="margin-bottom: 1em;">
+      It is an
+      <a href="https://github.com/mickmis/covid-certificate-scanner">
+        open-source application
+      </a>
+      and bug reports, suggestions, contributions, etc. are welcome.
+    </p>
+    <p style="margin-bottom: 1em;">
+      No data whatsoever is stored, collected or shared: the processing of the certificate is entirely done locally within your browser.
+    </p>
+    <p>
+      This web application is in no way affiliated, associated, authorized, endorsed by, or in any way officially
+      connected with any government agency.
+    </p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="side-nav-element">
+    <a class="side-nav-footer-icon" href="https://github.com/mickmis/covid-certificate-scanner">
+      <fa-icon [icon]="faGithub" size="3x"></fa-icon>
+    </a>
+    <a class="side-nav-footer-icon" href="https://twitter.com/Miscul">
+      <fa-icon [icon]="faTwitter" size="3x"></fa-icon>
+    </a>
+  </div>
+</div>
