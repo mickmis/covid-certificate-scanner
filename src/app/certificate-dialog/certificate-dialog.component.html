@@ -15,13 +15,13 @@
         <li>Unique Certificate Identifier (UVCI): <i>{{vEntry.ci}}</i></li>
         <li>Country of vaccination: <i>{{vEntry.co}}</i></li>
         <li>Issuer of certificate: <i>{{vEntry.is}}</i></li>
-        <li>Targeted disease or agent: <i>{{vEntry.tg}}</i></li>
+        <li>Targeted disease: <i>{{vEntry.tg}}</i></li>
 
+        <li>Vaccine name: <i>{{vEntry.mp}}</i></li>
+        <li>Prophylaxis: <i>{{vEntry.vp}}</i></li>
+        <li>Manufacturer: <i>{{vEntry.ma}}</i></li>
         <li>Doses: <i>{{vEntry.dn}} out of {{vEntry.sd}}</i></li>
         <li>Date of vaccination: <i>{{formatDate(vEntry.dt, false)}}</i></li>
-        <li>Marketing authorization holder or manufacturer: <i>{{vEntry.ma}}</i></li>
-        <li>Vaccine medicinal product: <i>{{vEntry.mp}}</i></li>
-        <li>Vaccine or prophylaxis: <i>{{vEntry.vp}}</i></li>
       </ul>
     </div>
   </div>
@@ -33,14 +33,14 @@
         <li>Unique Certificate Identifier (UVCI): <i>{{tEntry.ci}}</i></li>
         <li>Country of test: <i>{{tEntry.co}}</i></li>
         <li>Issuer of certificate: <i>{{tEntry.is}}</i></li>
-        <li>Targeted disease or agent: <i>{{tEntry.tg}}</i></li>
+        <li>Targeted disease: <i>{{tEntry.tg}}</i></li>
 
-        <li>RAT test name and manufacturer: <i>{{tEntry.ma ? tEntry.ma : "[missing]"}}</i></li>
-        <li>NAA test name: <i>{{tEntry.nm ? tEntry.nm : "[missing]"}}</i></li>
-        <li>Date and time of sample collection: <i>{{formatDate(tEntry.sc, true)}}</i></li>
+        <li>Test name: <i>{{tEntry.nm ? tEntry.nm : "[missing]"}}</i></li>
+        <li>Type: <i>{{tEntry.tt}}</i></li>
+        <li>Manufacturer: <i>{{tEntry.ma ? tEntry.ma : "[missing]"}}</i></li>
         <li>Testing center: <i>{{tEntry.tc}}</i></li>
         <li>Test result: <i>{{tEntry.tr}}</i></li>
-        <li>Type of test: <i>{{tEntry.tt}}</i></li>
+        <li>Date of sample collection: <i>{{formatDate(tEntry.sc, true)}}</i></li>
       </ul>
     </div>
   </div>
@@ -52,10 +52,10 @@
         <li>Unique Certificate Identifier (UVCI): <i>{{rEntry.ci}}</i></li>
         <li>Country of test: <i>{{rEntry.co}}</i></li>
         <li>Issuer of certificate: <i>{{rEntry.is}}</i></li>
-        <li>Targeted disease or agent: <i>{{rEntry.tg}}</i></li>
+        <li>Targeted disease: <i>{{rEntry.tg}}</i></li>
 
         <li>Validity: from <i>{{formatDate(rEntry.df, true)}}</i> to <i>{{formatDate(rEntry.du, true)}}</i></li>
-        <li>First positive NAA test result: <i>{{formatDate(rEntry.fr, true)}}</i></li>
+        <li>Date of first positive test result: <i>{{formatDate(rEntry.fr, true)}}</i></li>
       </ul>
     </div>
   </div>
