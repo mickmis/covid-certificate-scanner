@@ -39,7 +39,8 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/covid-certificate-parser/package.json
 
-      - if: steps.npm-publish.outputs.type != 'none'
+      - name: NPM publish confirmation
+        if: steps.npm-publish.outputs.type != 'none'
         run: |
-          echo "NPM package version changed: steps.npm-publish.outputs.old-version => steps.npm-publish.outputs.version"
-          echo "NPM package published to steps.npm-publish.outputs.tag"
+          echo "NPM package version changed: ${{steps.npm-publish.outputs.old-version}} => ${{steps.npm-publish.outputs.version}}"
+          echo "NPM package published to ${{steps.npm-publish.outputs.tag}}"
