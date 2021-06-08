@@ -13,15 +13,15 @@
       <h2>Vaccination (entry {{vIdx+1}})</h2>
       <ul>
         <li>Unique Certificate Identifier (UVCI): <i>{{vEntry.ci}}</i></li>
-        <li>Country of vaccination: <i>{{getValueName(ValueSet.CountryCode, vEntry.co)}}</i></li>
+        <li>Country of vaccination: <i>{{getValueFromSet(ValueSet.CountryCode, vEntry.co)}}</i></li>
         <li>Issuer of certificate: <i>{{vEntry.is}}</i></li>
-        <li>Targeted disease: <i>{{getValueName(ValueSet.Disease, vEntry.tg)}}</i></li>
+        <li>Targeted disease: <i>{{getValueFromSet(ValueSet.Disease, vEntry.tg)}}</i></li>
 
-        <li>Vaccine name: <i>{{getValueName(ValueSet.Vaccine, vEntry.mp)}}</i></li>
-        <li>Prophylaxis: <i>{{getValueName(ValueSet.VaccineProphylaxis, vEntry.vp)}}</i></li>
-        <li>Manufacturer: <i>{{getValueName(ValueSet.VaccineManufacturer, vEntry.ma)}}</i></li>
+        <li>Vaccine name: <i>{{getValueFromSet(ValueSet.Vaccine, vEntry.mp)}}</i></li>
+        <li>Prophylaxis: <i>{{getValueFromSet(ValueSet.VaccineProphylaxis, vEntry.vp)}}</i></li>
+        <li>Manufacturer: <i>{{getValueFromSet(ValueSet.VaccineManufacturer, vEntry.ma)}}</i></li>
         <li>Doses: <i>{{vEntry.dn}} out of {{vEntry.sd}}</i></li>
-        <li>Date of vaccination: <i>{{formatDate(vEntry.dt, false)}}</i></li>
+        <li>Date of vaccination: <i>{{formatDate(vEntry.dt, true)}}</i></li>
       </ul>
     </div>
   </div>
@@ -31,15 +31,15 @@
       <h2>Test (entry {{tIdx+1}})</h2>
       <ul>
         <li>Unique Certificate Identifier (UVCI): <i>{{tEntry.ci}}</i></li>
-        <li>Country of test: <i>{{getValueName(ValueSet.CountryCode, tEntry.co)}}</i></li>
+        <li>Country of test: <i>{{getValueFromSet(ValueSet.CountryCode, tEntry.co)}}</i></li>
         <li>Issuer of certificate: <i>{{tEntry.is}}</i></li>
-        <li>Targeted disease: <i>{{getValueName(ValueSet.Disease, tEntry.tg)}}</i></li>
+        <li>Targeted disease: <i>{{getValueFromSet(ValueSet.Disease, tEntry.tg)}}</i></li>
 
         <li>Test name: <i>{{tEntry.nm ? tEntry.nm : "[missing]"}}</i></li>
-        <li>Type: <i>{{getValueName(ValueSet.TestType, tEntry.tt)}}</i></li>
-        <li>Manufacturer: <i>{{tEntry.ma ? getValueName(ValueSet.TestManufacturer, tEntry.ma) : "[missing]"}}</i></li>
+        <li>Type: <i>{{getValueFromSet(ValueSet.TestType, tEntry.tt)}}</i></li>
+        <li>Manufacturer: <i>{{tEntry.ma ? getValueFromSet(ValueSet.TestManufacturer, tEntry.ma) : "[missing]"}}</i></li>
         <li>Testing center: <i>{{tEntry.tc}}</i></li>
-        <li>Test result: <i>{{getValueName(ValueSet.TestResult, tEntry.tr)}}</i></li>
+        <li>Test result: <i>{{getValueFromSet(ValueSet.TestResult, tEntry.tr)}}</i></li>
         <li>Date of sample collection: <i>{{formatDate(tEntry.sc, true)}}</i></li>
       </ul>
     </div>
@@ -50,9 +50,9 @@
       <h2>Recovery (entry {{rIdx+1}})</h2>
       <ul>
         <li>Unique Certificate Identifier (UVCI): <i>{{rEntry.ci}}</i></li>
-        <li>Country of test: <i>{{getValueName(ValueSet.CountryCode, rEntry.co)}}</i></li>
+        <li>Country of test: <i>{{getValueFromSet(ValueSet.CountryCode, rEntry.co)}}</i></li>
         <li>Issuer of certificate: <i>{{rEntry.is}}</i></li>
-        <li>Targeted disease: <i>{{getValueName(ValueSet.Disease, rEntry.tg)}}</i></li>
+        <li>Targeted disease: <i>{{getValueFromSet(ValueSet.Disease, rEntry.tg)}}</i></li>
 
         <li>Validity: from <i>{{formatDate(rEntry.df, true)}}</i> to <i>{{formatDate(rEntry.du, true)}}</i></li>
         <li>Date of first positive test result: <i>{{formatDate(rEntry.fr, true)}}</i></li>

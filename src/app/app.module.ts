@@ -18,7 +18,6 @@ import { CertificateDialogComponent } from './certificate-dialog/certificate-dia
 import {CertificatesService} from './certificates.service';
 import {NgpImagePickerModule} from 'ngp-image-picker';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
-import {ValueSetsService} from './value-sets.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import {ValueSetsService} from './value-sets.service';
   ],
   providers: [
     CertificatesService,
-    ValueSetsService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, appearance: 'fill'}},
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 5000}}
   ],

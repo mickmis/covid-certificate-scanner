@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import {Observable, ReplaySubject} from 'rxjs';
-import {DigitalCovidCertificate} from './digital-covid-certificate';
 import {CertificateDialogComponent} from './certificate-dialog/certificate-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {CertificateContainer} from 'covid-certificate-parser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CertificatesService {
 
-  private readonly _cert: ReplaySubject<DigitalCovidCertificate>;
+  private readonly _cert: ReplaySubject<CertificateContainer>;
 
   private parsingCount: number;
 
   constructor(private dialogService: MatDialog, private snackBarService: MatSnackBar) {
-    this._cert = new ReplaySubject<DigitalCovidCertificate>(1);
+    this._cert = new ReplaySubject<CertificateContainer>(1);
     this.parsingCount = 0;
   }
 
-  setCert(cert: DigitalCovidCertificate): void {
+  setCert(cert: CertificateContainer): void {
     this._cert.next(cert);
   }
 
@@ -27,7 +27,7 @@ export class CertificatesService {
     this.parsingCount++;
   }
 
-  onParseSuccess(cert: DigitalCovidCertificate): void {
+  onParseSuccess(cert: CertificateContainer): void {
     this.parsingCount--;
     this.setCert(cert);
     this.dialogService.open(CertificateDialogComponent, {data: this.cert});
@@ -39,7 +39,7 @@ export class CertificatesService {
     this.snackBarService.open(errMsg, 'Close');
   }
 
-  get cert(): Observable<DigitalCovidCertificate> {
+  get cert(): Observable<CertificateContainer> {
     return this._cert;
   }
 

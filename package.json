@@ -7,8 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "pull-dgc-schema": "git subtree pull --prefix src/assets/ehn-dgc-schema-subtree https://github.com/ehn-digital-green-development/ehn-dgc-schema.git main --squash"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -26,16 +25,13 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "base45": "^3.0.0",
-    "cbor-web": "^7.0.5",
-    "cose-js": "^0.6.0",
     "ngp-image-picker": "^1.4.0",
-    "pako": "^2.0.3",
     "qr-scanner": "^1.2.0",
     "resize-observer": "^1.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3"
+    "zone.js": "~0.11.3",
+    "covid-certificate-parser": "file:packages/covid-certificate-parser"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^11.1.1",

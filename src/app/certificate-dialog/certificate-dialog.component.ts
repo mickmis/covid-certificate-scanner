@@ -1,11 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {DigitalCovidCertificate} from '../digital-covid-certificate';
-import {EuDigitalCovidCert121} from '../models/eu-digital-covid-cert/eu-digital-covid-cert-121';
 import {toHexString, formatDate, timestampToDate} from '../utils';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {ValueSetsService, ValueSet} from '../value-sets.service';
+import {ValueSetMapper, ValueSet, CertificateContainer, EuDigitalCovidCert121} from 'covid-certificate-parser';
 
 @Component({
   selector: 'app-certificate-dialog',
@@ -19,12 +17,15 @@ export class CertificateDialogComponent implements OnInit {
   timestampToDate = timestampToDate;
   ValueSet = ValueSet;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private _cert: Observable<DigitalCovidCertificate>,
-              private valueSetsService: ValueSetsService) { }
+  private valueSetMapper: ValueSetMapper;
+
+  constructor(@Inject(MAT_DIALOG_DATA) private _cert: Observable<CertificateContainer>) {
+    this.valueSetMapper = new ValueSetMapper();
+  }
 
   ngOnInit(): void { }
 
-  get cert(): Observable<DigitalCovidCertificate> {
+  get cert(): Observable<CertificateContainer> {
     return this._cert;
   }
 
@@ -55,7 +56,7 @@ export class CertificateDialogComponent implements OnInit {
     );
   }
 
-  getValueName(valueSet: ValueSet, valueCode: string): string {
-    return `${this.valueSetsService.getValueName(valueSet, valueCode)} (${valueCode})`;
+  getValueFromSet(valueSet: ValueSet, valueCode: string): string {
+    return `${this.valueSetMapper.getValue(valueSet, valueCode)} (${valueCode})`;
   }
 }

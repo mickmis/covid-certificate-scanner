@@ -2,10 +2,10 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import QrScanner from 'qr-scanner';
 import QrScannerWorkerPath from '!!file-loader!../../../node_modules/qr-scanner/qr-scanner-worker.min.js';
 import {switchMap} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
-import {DigitalCovidCertificate} from '../digital-covid-certificate';
 import {CertificatesService} from '../certificates.service';
 import {ImagePickerConf} from 'ngp-image-picker';
+import {CertificateParser} from 'covid-certificate-parser';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -35,15 +35,15 @@ export class MainComponent implements OnInit {
     this.qrScanner = new QrScanner(this.webcamRef.nativeElement, qrPayload => {
       this.certService.onParseStart();
       this.qrScanner.stop();
-      DigitalCovidCertificate.New(qrPayload)
+      CertificateParser.ParseQrPayload(qrPayload)
         .subscribe(cert => this.certService.onParseSuccess(cert), err => this.certService.onParseError(err));
     });
   }
 
   loadCertFromImage(image: string | HTMLCanvasElement | HTMLVideoElement | ImageBitmap | HTMLImageElement | File | URL): void {
     this.certService.onParseStart();
-    fromPromise(QrScanner.scanImage(image)).pipe(
-      switchMap(qrPayload => DigitalCovidCertificate.New(qrPayload)),
+    from(QrScanner.scanImage(image) as Promise<string>).pipe(
+      switchMap(qrPayload => CertificateParser.ParseQrPayload(qrPayload)),
     ).subscribe(cert => this.certService.onParseSuccess(cert), err => this.certService.onParseError(err));
   }
 
