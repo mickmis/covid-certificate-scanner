@@ -6,6 +6,9 @@ on:
 jobs:
   npm:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/covid-certificate-parser
 
     steps:
       - uses: actions/setup-node@v2
@@ -21,23 +24,18 @@ jobs:
 
       - name: Build npm package
         run: |
-          pushd packages/covid-certificate-parser
           npm install
           npm run build
-          popd
 
       - name: Test npm package
         run: |
-          pushd packages/covid-certificate-parser
           npm run lint
           npm run test
-          popd
 
       - uses: JS-DevTools/npm-publish@v1
         id: npm-publish
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: ./packages/covid-certificate-parser/package.json
 
       - name: NPM publish confirmation
         if: steps.npm-publish.outputs.type != 'none'
