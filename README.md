@@ -17,6 +17,9 @@ The development was made possible by the fact that the specifications of the cer
 - languages
 
 ## What's new
+### 08/06/21
+- factor away and publish an [NPM package](https://www.npmjs.com/package/covid-certificate-parser)
+
 ### 06/06/21 - Initial version 
 - scan certificates from a camera, an image or from provided examples
 - use of value sets for interpreting raw data
