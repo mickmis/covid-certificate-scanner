@@ -1,0 +1,51 @@
+{
+  "name": "covid-certificate-parser",
+  "version": "0.0.1",
+  "description": "Decode and parse EU Digital COVID Certificates (previously known as EU Digital Green Certificates).",
+  "homepage": "https://github.com/mickmis/covid-certificate-scanner",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "lint": "eslint src/**/*",
+    "pull-dgc-schema": "git -C ../../ subtree pull --prefix packages/covid-certificate-parser/ehn-dgc-schema-subtree https://github.com/ehn-digital-green-development/ehn-dgc-schema.git main --squash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mickmis/covid-certificate-scanner.git",
+    "directory": "packages/covid-certificate-parser"
+  },
+  "keywords": [
+    "covid certificate",
+    "green certificate",
+    "parser",
+    "covid"
+  ],
+  "author": {
+    "name": "Mickaël Misbach",
+    "email": "mickael@misba.ch",
+    "url": "https://mickael.misba.ch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/pako": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.28.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "base45": "^3.0.0",
+    "cbor-web": "^7.0.5",
+    "pako": "^2.0.3",
+    "rxjs": "^6.6.7"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./lib",
+    "declaration": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "es2015",
+    "module": "es2020",
+    "strict": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}
