@@ -20,19 +20,27 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build npm package
-        working-directory: packages/covid-certificate-parser
         run: |
+          pushd packages/covid-certificate-parser
           npm install
           npm run build
+          popd
 
       - name: Test npm package
-        working-directory: packages/covid-certificate-parser
         run: |
+          pushd packages/covid-certificate-parser
           npm run lint
           npm run test
+          popd
 
-      - name: Publish npm package
-        working-directory: packages/covid-certificate-parser
+      - uses: JS-DevTools/npm-publish@v1
+        id: npm-publish
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./packages/covid-certificate-parser/package.json
+
+      - name: NPM publish confirmation
+        if: steps.npm-publish.outputs.type != 'none'
         run: |
-          npm install -g @jsdevtools/npm-publish
-          npm-publish --token=${{ secrets.NPM_TOKEN }}
+          echo "NPM package version changed: ${{steps.npm-publish.outputs.old-version}} => ${{steps.npm-publish.outputs.version}}"
+          echo "NPM package published to ${{steps.npm-publish.outputs.tag}}"
