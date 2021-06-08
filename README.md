@@ -1,9 +1,11 @@
 # EU Digital COVID (Green) Certificate Scanner
-This web application allows to scan any
+This web application enables the scan of any
 [EU Digital COVID Certificate](https://ec.europa.eu/info/live-work-travel-eu/coronavirus-response/safe-covid-19-vaccines-europeans/eu-digital-covid-certificate_en)
-(previously known as EU Digital Green Certificate) emitted to extract and display all the information it encloses. It is implemented in Typescript using Angular v11.
+(previously known as EU Digital Green Certificate) to extract and display all the information it encloses. It is implemented in Typescript using Angular v11.
 
 The development was made possible by the fact that the specifications of the certificate are in open-access, and the reference implementations are open-source.
+
+[This repository also contains an NPM package providing a library to parse such certificates.](covid-certificate-parser/)
 
 ## Useful links
 - [A reference implementation](https://github.com/ehn-digital-green-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js)
