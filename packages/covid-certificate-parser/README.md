@@ -17,34 +17,35 @@ Visit https://mickmis.github.io/covid-certificate-scanner/
 ## How to use
 ### Typescript example of how to parse a QR payload and use the value set mapper
 ```typescript
-import {ValueSetMapper, ValueSet, CertificateContainer} from 'covid-certificate-parser';
+import {CertificateParser, ValueSetMapper, ValueSet, CertificateContainer} from 'covid-certificate-parser';
 
 import QrScanner from 'qr-scanner';
 import {switchMap} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
+import {from} from 'rxjs';
 
 // this example digital covid certificate contains one vaccination certificate
 const testImageUrl = 'https://mickmis.github.io/covid-certificate-scanner/assets/1.png';
 
 // use for example the npm package qr-scanner to scan a QR from the image
-fromPromise(QrScanner.scanImage(testImageUrl)).pipe(
-    // the parser takes as input a string containing the QR payload
-    switchMap((qrPayload: string) => CertificateParser.ParseQrPayload(qrPayload)),
+from(QrScanner.scanImage(testImageUrl) as Promise<string>).pipe(
+  // the parser takes as input a string containing the QR payload
+  switchMap((qrPayload: string) => CertificateParser.ParseQrPayload(qrPayload)),
 ).subscribe((certContainer: CertificateContainer) => {
-    
+
   // extract some information about the CBOR/COSE container of the certificate
   console.log(`Issuer of the signature of the certificate: ${certContainer.cwtIssuer}`);
   console.log(`Key identifier of the signature: ${certContainer.coseKeyId}`);
 
-  // extract some information about the vaccination certificate
-  console.log(`Dose number: ${certContainer.certificate.v[0].dn}`);
-  console.log(`Total doses: ${certContainer.certificate.v[0].sd}`);
-  
-  // use the provided value sets to interpret some certificate data
-  const valueSetMapper = new ValueSetMapper();
-  console.log(`Country of vaccination: ${valueSetMapper.getValue(ValueSet.CountryCode, certContainer.certificate.v[0].co)}`);
-  console.log(`Name of vaccine: ${valueSetMapper.getValue(ValueSet.Vaccine, certContainer.certificate.v[0].mp)}`);
+  if (certContainer.certificate.v) {
+    // extract some information about the vaccination certificate
+    console.log(`Dose number: ${certContainer.certificate.v[0].dn}`);
+    console.log(`Total doses: ${certContainer.certificate.v[0].sd}`);
 
+    // use the provided value sets to interpret some certificate data
+    const valueSetMapper = new ValueSetMapper();
+    console.log(`Country of vaccination: ${valueSetMapper.getValue(ValueSet.CountryCode, certContainer.certificate.v[0].co)}`);
+    console.log(`Name of vaccine: ${valueSetMapper.getValue(ValueSet.Vaccine, certContainer.certificate.v[0].mp)}`);
+  }
 }, err => console.log(err));
 ```
 
