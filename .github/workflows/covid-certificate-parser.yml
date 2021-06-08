@@ -6,8 +6,6 @@ on:
 jobs:
   npm:
     runs-on: ubuntu-latest
-    env:
-      PUSH: false #${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags') }}
 
     steps:
       - uses: actions/setup-node@v2
@@ -36,8 +34,12 @@ jobs:
           popd
 
       - uses: JS-DevTools/npm-publish@v1
-        if: ${{ env.PUSH == 'true' }}
+        id: npm-publish
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./packages/covid-certificate-parser/package.json
-          #todo: will not be triggered
+
+      - if: steps.npm-publish.outputs.type != 'none'
+        run: |
+          echo "NPM package version changed: steps.npm-publish.outputs.old-version => steps.npm-publish.outputs.version"
+          echo "NPM package published to steps.npm-publish.outputs.tag"
