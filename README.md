@@ -5,7 +5,7 @@ This web application enables the scan of any
 
 The development was made possible by the fact that the specifications of the certificate are in open-access, and the reference implementations are open-source.
 
-[This repository also contains an NPM package providing a library to parse such certificates.](covid-certificate-parser/)
+[This repository also contains an NPM package providing a library to parse such certificates.](packaged/covid-certificate-parser/)
 
 ## Useful links
 - [A reference implementation](https://github.com/ehn-digital-green-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js)
