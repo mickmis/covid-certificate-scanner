@@ -1,6 +1,6 @@
 {
   "name": "covid-certificate-parser",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Decode and parse EU Digital COVID Certificates (previously known as EU Digital Green Certificates).",
   "homepage": "https://github.com/mickmis/covid-certificate-scanner",
   "main": "lib/src/index.js",
