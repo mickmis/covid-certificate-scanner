@@ -1,3 +1,6 @@
+# Archived Project
+**This project will not be updated anymore.**
+
 # EU Digital COVID (Green) Certificate Scanner
 This web application enables the scan of any
 [EU Digital COVID Certificate](https://ec.europa.eu/info/live-work-travel-eu/coronavirus-response/safe-covid-19-vaccines-europeans/eu-digital-covid-certificate_en)
